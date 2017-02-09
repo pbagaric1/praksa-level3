@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace Project.Repository
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository: IGenericRepository
     {
         private readonly IVehicleContext _context;
-        private readonly DbSet<T> _dbset;
 
         public GenericRepository(IVehicleContext context)
         {
@@ -29,8 +28,9 @@ namespace Project.Repository
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> DeleteAsync<T>(T entity) where T : class
+        public async Task<int> DeleteAsync<T>(Guid id) where T : class
         {
+            T entity = await _context.Set<T>().FindAsync(id);
             _context.Set<T>().Remove(entity);
             return await _context.SaveChangesAsync();
         }
@@ -50,7 +50,11 @@ namespace Project.Repository
             return await _context.SaveChangesAsync();
         }
 
+        public async Task<T> GetAsync<T>(Guid id) where T: class
+        {
 
-        
+            var T_id = await _context.Set<T>().FindAsync(id);
+            return  T_id;
+        }
     }
 }

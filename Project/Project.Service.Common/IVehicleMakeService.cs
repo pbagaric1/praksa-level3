@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Repository
+namespace Project.Service.Common
 {
-    public class Class1
+    public interface IVehicleMakeService
     {
     }
 }
