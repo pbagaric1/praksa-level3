@@ -18,6 +18,8 @@ namespace Project.MVC_WebAPI.App_Start
     using Model;
     using DAL.Interfaces;
     using DAL;
+    using System.Linq;
+    using System.Web.Http;
 
     public static class NinjectWebCommon 
     {
@@ -47,13 +49,20 @@ namespace Project.MVC_WebAPI.App_Start
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
+            var settings = new NinjectSettings();
+            settings.LoadExtensions = true;
+            settings.ExtensionSearchPatterns = settings.ExtensionSearchPatterns
+                .Union(new string[] { "Project.*.dll" }).ToArray();
+            var kernel = new StandardKernel(settings);
             try
             {
+
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+
+                GlobalConfiguration.Configuration.DependencyResolver = new Ninject.Web.WebApi.NinjectDependencyResolver(kernel);
                 return kernel;
             }
             catch
@@ -69,17 +78,6 @@ namespace Project.MVC_WebAPI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IVehicleMakeService>().To<VehicleMakeService>();
-            kernel.Bind<IVehicleModelService>().To<VehicleModelService>();
-            kernel.Bind<IVehicleMakeRepository>().To<VehicleMakeRepository>();
-            kernel.Bind<IVehicleModelRepository>().To<VehicleModelRepository>();
-            kernel.Bind<IGenericRepository>().To<GenericRepository>();
-            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
-            kernel.Bind<IVehicleMakeDomainModel>().To<VehicleMakeDomainModel>();
-            kernel.Bind<IVehicleModelDomainModel>().To<VehicleModelDomainModel>();
-            kernel.Bind<IVehicleContext>().To<VehicleContext>();
-
-
         }       
     }
 }

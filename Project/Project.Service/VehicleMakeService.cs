@@ -14,6 +14,11 @@ namespace Project.Service
         //private IUnitOfWork _uow;
         private IVehicleMakeRepository _vMake;
 
+        public VehicleMakeService(IVehicleMakeRepository vmake)
+        {
+            _vMake = vmake;
+        }
+
         public async Task<int> AddAsync(IVehicleMakeDomainModel entity)
         {
             return await _vMake.AddAsync(entity);
