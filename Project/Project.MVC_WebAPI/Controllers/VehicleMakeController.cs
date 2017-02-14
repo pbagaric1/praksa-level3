@@ -8,10 +8,11 @@ using System.Web.Http;
 using AutoMapper;
 using Project.MVC_WebAPI.ViewModels;
 using System.Threading.Tasks;
+using Project.Model.Common;
 
 namespace Project.MVC_WebAPI.Controllers
 {
-    //[Route("api/VehicleMake")]
+    [RoutePrefix("api/VehicleMake")]
     public class VehicleMakeController : ApiController
     {
        
@@ -20,13 +21,30 @@ namespace Project.MVC_WebAPI.Controllers
         {
             vmakeService = vmService;
         }
-        [Route("api/VehicleMake")]
-        //[Route("GetAll")]
+        [Route("GetAll")]
         [HttpGet]
         public async Task <HttpResponseMessage> GetAllAsync()
         {
             var entity = Mapper.Map<IEnumerable<VehicleMakeViewModel>>(await vmakeService.GetAllAsync());
             return Request.CreateResponse(HttpStatusCode.OK, entity);
         }
+
+        //[Route("Add")]
+        //[HttpPost]
+        //public async Task<HttpResponseMessage> AddAsync(VehicleMakeViewModel vmakeView)
+        //{
+        //    var entity = Mapper.Map(await vmakeService.AddAsync(vmakeView));
+        //    return Request.CreateResponse(HttpStatusCode.OK, entity);
+        //}
+
+        [Route("Delete")]
+        [HttpDelete]
+        public async Task<HttpResponseMessage> DeleteAsync(Guid id)
+        {
+
+            Mapper.Map<VehicleMakeViewModel>(await vmakeService.DeleteAsync(id));
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
     }
 }

@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using Project.MVC_WebAPI.App_Start;
+using Ninject.Web.Mvc;
 
 namespace Project.MVC_WebAPI
 {

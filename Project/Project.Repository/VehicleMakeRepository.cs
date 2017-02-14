@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Project.DAL.Models;
 using Project.Model.Common;
 using AutoMapper;
+using System.Data.Entity;
 
 namespace Project.Repository
 {
@@ -37,7 +38,9 @@ namespace Project.Repository
 
         public async Task<IEnumerable<IVehicleMakeDomainModel>> GetAllAsync()
         {
-            return Mapper.Map<IEnumerable<IVehicleMakeDomainModel>>(await genRepo.GetAllAsync<VehicleMake>());
+            //var x = await genRepo.GetQueryable<VehicleMake>().Include(s => s.VehicleModels).ToListAsync();
+            var response = Mapper.Map<IEnumerable<IVehicleMakeDomainModel>>(await genRepo.GetAllAsync<VehicleMake>());
+            return response;
         }
 
         public async  Task<int> UpdateAsync(IVehicleMakeDomainModel entity)

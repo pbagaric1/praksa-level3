@@ -17,6 +17,12 @@ namespace Project.Repository
         {
             _context = context;
         }
+
+        public IQueryable<T> GetQueryable<T>() where T : class
+        {
+            return _context.Set<T>();
+        }
+
         public async Task <IEnumerable<T>> GetAllAsync<T>() where T: class
         {
             return await _context.Set<T>().ToListAsync();

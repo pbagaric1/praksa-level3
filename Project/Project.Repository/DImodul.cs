@@ -13,9 +13,9 @@ namespace Project.Repository
     {
         public override void Load()
         {
+            Bind<IGenericRepository>().To<GenericRepository>();
             Bind<IVehicleMakeRepository>().To<VehicleMakeRepository>();
             Bind<IVehicleModelRepository>().To<VehicleModelRepository>();
-            Bind<IGenericRepository>().To<GenericRepository>();
             Bind<IUnitOfWork>().To<UnitOfWork>();
         }
     }

@@ -16,8 +16,8 @@ namespace Project.MVC_WebAPI.App_Start
         {
             Mapper.Initialize(config =>
             {
-                // config.CreateMap<VehicleMake, VehicleMakeDomainModel>().ReverseMap();
-                // config.CreateMap<VehicleModel, VehicleModelDomainModel>().ReverseMap();
+
+
                 config.CreateMap<VehicleMake, VehicleMakeDomainModel>().ReverseMap();
                 config.CreateMap<VehicleMake, IVehicleMakeDomainModel>().ReverseMap();
 

@@ -12,6 +12,12 @@ namespace Project.Service
     public class VehicleModelService : IVehicleModelService
     {
         private IVehicleModelRepository _vModel;
+
+        public VehicleModelService(IVehicleModelRepository vmodel)
+        {
+            _vModel = vmodel;
+        }
+
         public async Task<int> AddAsync(IVehicleModelDomainModel entity)
         {
             return await _vModel.AddAsync(entity);

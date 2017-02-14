@@ -36,7 +36,8 @@ namespace Project.Repository
 
         public async Task<IEnumerable<IVehicleModelDomainModel>> GetAllAsync()
         {
-            return Mapper.Map<IEnumerable<IVehicleModelDomainModel>>(await genRepo.GetAllAsync<VehicleModel>());
+            var response = Mapper.Map<IEnumerable<IVehicleModelDomainModel>>(await genRepo.GetAllAsync<VehicleModel>());
+            return response;
         }
 
         public async Task<int> UpdateAsync(IVehicleModelDomainModel entity)
