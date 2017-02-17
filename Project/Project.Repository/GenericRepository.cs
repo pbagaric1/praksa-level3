@@ -12,10 +12,12 @@ namespace Project.Repository
     public class GenericRepository: IGenericRepository
     {
         private readonly IVehicleContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GenericRepository(IVehicleContext context)
+        public GenericRepository(IVehicleContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         public IQueryable<T> GetQueryable<T>() where T : class

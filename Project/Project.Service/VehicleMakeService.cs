@@ -16,7 +16,7 @@ namespace Project.Service
 
         public VehicleMakeService(IVehicleMakeRepository vmake)
         {
-            _vMake = vmake;
+            this._vMake = vmake;
         }
 
         public async Task<int> AddAsync(IVehicleMakeDomainModel entity)
@@ -42,6 +42,11 @@ namespace Project.Service
         public async Task<int> UpdateAsync(IVehicleMakeDomainModel entity)
         {
             return await _vMake.UpdateAsync(entity);
+        }
+
+        public async Task<IVehicleMakeDomainModel> GetAsync(Guid id)
+        {
+            return await _vMake.GetAsync(id);
         }
     }
 }

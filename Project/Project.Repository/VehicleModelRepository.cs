@@ -12,9 +12,9 @@ namespace Project.Repository
 {
     public class VehicleModelRepository : IVehicleModelRepository
     {
-        private GenericRepository genRepo;
+        private IGenericRepository genRepo;
 
-        public VehicleModelRepository(GenericRepository context)
+        public VehicleModelRepository(IGenericRepository context)
         {
             genRepo = context;
         }
@@ -31,7 +31,7 @@ namespace Project.Repository
 
         public async Task<int> DeleteAsync(Guid id)
         {
-            return await genRepo.DeleteAsync<IVehicleModelDomainModel>(id);
+            return await genRepo.DeleteAsync<VehicleModel>(id);
         }
 
         public async Task<IEnumerable<IVehicleModelDomainModel>> GetAllAsync()
@@ -43,6 +43,13 @@ namespace Project.Repository
         public async Task<int> UpdateAsync(IVehicleModelDomainModel entity)
         {
             return await genRepo.UpdateAsync(Mapper.Map<VehicleModel>(entity));
+        }
+
+        public async Task<IVehicleModelDomainModel> GetAsync(Guid id)
+        {
+
+            var T_id = Mapper.Map<IVehicleModelDomainModel>(await genRepo.GetAsync<VehicleModel>(id));
+            return T_id;
         }
     }
 }

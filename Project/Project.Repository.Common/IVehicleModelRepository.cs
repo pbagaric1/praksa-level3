@@ -14,5 +14,6 @@ namespace Project.Repository.Common
         Task<int> DeleteAsync(Guid id);
         Task<int> DeleteAllAsync(IEnumerable<IVehicleModelDomainModel> entity);
         Task<int> UpdateAsync(IVehicleModelDomainModel entity);
+        Task<IVehicleModelDomainModel> GetAsync(Guid id);
     }
 }

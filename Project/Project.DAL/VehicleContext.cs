@@ -15,7 +15,6 @@ namespace Project.DAL
     {
         public VehicleContext() : base("VehicleContext")
         {
-            base.Configuration.ProxyCreationEnabled = false;
         }
 
 

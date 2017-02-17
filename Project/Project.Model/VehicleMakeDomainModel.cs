@@ -14,6 +14,6 @@ namespace Project.Model
         public string Name { get; set; }
         public string Abrv { get; set; }
 
-        public ICollection<IVehicleModelDomainModel> VehicleModels { get; set; }
+        public virtual ICollection<IVehicleModelDomainModel> VehicleModels { get; set; }
     }
 }

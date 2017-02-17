@@ -32,13 +32,14 @@ namespace Project.Repository
 
         public async Task<int> DeleteAsync(Guid id)
         {
-            return await genRepo.DeleteAsync<IVehicleMakeDomainModel>(id);
+            return await genRepo.DeleteAsync<VehicleMake>(id);
 
         }
 
         public async Task<IEnumerable<IVehicleMakeDomainModel>> GetAllAsync()
         {
-            //var x = await genRepo.GetQueryable<VehicleMake>().Include(s => s.VehicleModels).ToListAsync();
+            //await genRepo.GetAllAsync<VehicleMake>()
+           // var x = await genRepo.GetQueryable<VehicleMake>().Include(s => s.VehicleModels).ToListAsync();
             var response = Mapper.Map<IEnumerable<IVehicleMakeDomainModel>>(await genRepo.GetAllAsync<VehicleMake>());
             return response;
         }
@@ -47,5 +48,14 @@ namespace Project.Repository
         {
             return await genRepo.UpdateAsync(Mapper.Map<VehicleMake>(entity));
         }
+
+        public async Task<IVehicleMakeDomainModel> GetAsync(Guid id)
+        {
+
+            var T_id = Mapper.Map<IVehicleMakeDomainModel>(await genRepo.GetAsync<VehicleMake>(id));
+            return T_id;
+        }
+
+
     }
 }

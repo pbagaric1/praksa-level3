@@ -42,5 +42,10 @@ namespace Project.Service
         {
             return await _vModel.UpdateAsync(entity);
         }
+
+        public async Task<IVehicleModelDomainModel> GetAsync(Guid id)
+        {
+            return await _vModel.GetAsync(id);
+        }
     }
 }
