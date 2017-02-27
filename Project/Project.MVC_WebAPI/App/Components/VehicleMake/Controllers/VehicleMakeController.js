@@ -1,10 +1,4 @@
-﻿/// <reference path="D:\praksa-level3\Project\Project.MVC_WebAPI\Scripts/angular.min.js" />
-/// <reference path="../../App.Module.js" />
-
-
-//var app = angular.module('app', []);
-
-app.controller("MakeController", function ($scope, $http) {
+﻿app.controller("MakeController", function ($scope, $http) {
 
 
     $scope.makes = [];
@@ -15,4 +9,9 @@ app.controller("MakeController", function ($scope, $http) {
         }, function () {
             console.log("Can't get reponse.");
         });
+
+    $scope.sort = function (keyname) {
+        $scope.sortKey = keyname;
+        $scope.reverse = !$scope.reverse;
+    }
 });

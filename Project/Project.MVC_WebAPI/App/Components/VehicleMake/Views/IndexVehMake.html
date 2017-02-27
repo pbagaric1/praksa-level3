@@ -1,0 +1,47 @@
+﻿<div class="container" ng-controller="MakeController">
+    <h1>Vehicle Make</h1>
+    <div style="text-align: right">
+        <a ui-sref="vehicleMakeAdd">Create Vehicle Make</a>
+        </div>
+        <form class="form-inline">
+            <div class="form-group">
+                <label>Search</label>
+                <input type="text" ng-model="search" class="form-control" placeholder="Search">
+            </div>
+        </form>
+        <br />
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th ng-click="sort('Name')" style="cursor:pointer">
+                        Name
+                        <span class="glyphicon sort-icon" ng-show="sortKey=='Name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th ng-click="sort('Abrv')" style="cursor:pointer">
+                        Abrv
+                        <span class="glyphicon sort-icon" ng-show="sortKey=='Abrv'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr dir-paginate="make in makes | orderBy:sortKey:reverse | filter:search | itemsPerPage:5">
+                    <td>{{make.Name}}</td>
+                    <td>{{make.Abrv}}</td>
+                    <td>
+                        <a ui-sref="vehicleMakeDelete({vmkId: make.Id})">Delete</a>
+                        <a ui-sref="vehicleMakeEdit({vmkId: make.Id})">Edit</a>
+                        <a ui-sref="vehicleMakeDetails({vmkId: make.Id})">Details</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    <dir-pagination-controls max-size="5"
+                             direction-links="true"
+                             boundary-links="true">
+    </dir-pagination-controls>
+    <br />
+        <button ui-sref="vehicleModel" class="btn btn-danger navbar-btn">
+            Vehicle Model
+        </button>
+    </div>

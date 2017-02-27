@@ -1,0 +1,29 @@
+﻿<div ng-controller="DetailsVehicleMakeController" id="details" aria-labelledby="details" aria-hidden="true" ng-init="detailsVehicleMake()">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" id="details-form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="details-modal-label">Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="details-name" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <label ng-bind="Name"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="details-abrv" class="col-sm-2 control-label">Abrv</label>
+                        <div class="col-sm-10">
+                            <label ng-bind="Abrv"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="Close()">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

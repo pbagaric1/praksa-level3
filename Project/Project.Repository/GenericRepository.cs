@@ -3,6 +3,7 @@ using Project.Repository.Common;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,7 +55,7 @@ namespace Project.Repository
 
         public async Task<int> UpdateAsync<T>(T entity) where T : class
         {
-            _context.Entry(entity).State = EntityState.Modified;
+            _context.Set<T>().AddOrUpdate(entity);
             return await _context.SaveChangesAsync();
         }
 

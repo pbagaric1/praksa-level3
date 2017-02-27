@@ -42,7 +42,8 @@ namespace Project.Repository
 
         public async Task<int> UpdateAsync(IVehicleModelDomainModel entity)
         {
-            return await genRepo.UpdateAsync(Mapper.Map<VehicleModel>(entity));
+            var x = await genRepo.UpdateAsync(Mapper.Map<VehicleModel>(entity));
+            return x;
         }
 
         public async Task<IVehicleModelDomainModel> GetAsync(Guid id)

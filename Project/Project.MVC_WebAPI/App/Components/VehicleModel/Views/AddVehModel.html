@@ -1,0 +1,18 @@
+﻿<div class="container" ng-controller="AddVehicleModelController" ng-init="getMakers()">
+    <h2>Add Vehicle Model</h2>
+    <form>
+        <div class="form-group">
+            <label>Vehicle make:</label>
+            <select class="dropdown dropdown-toggle" ng-model="selectedMaker" ng-options="item.Name for item in makers"></select>
+        </div>
+        <div class="form-group">
+            <label>Model name:</label>
+            <input type="text" class="form-control" placeholder="Name..." ng-model="Name" />
+        </div>
+        <div class="form-group">
+            <label>Model Abrv:</label>
+            <input type="text" class="form-control" placeholder="Abrv..." ng-model="Abrv" />
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="addVehicleModel()">Add model</button>
+    </form>
+</div>

@@ -25,15 +25,30 @@ namespace Project.MVC_WebAPI.Controllers
         [HttpGet]
         public async Task <HttpResponseMessage> GetAllAsync()
         {
-            var entity = Mapper.Map<IEnumerable<VehicleMakeViewModel>>(await vmakeService.GetAllAsync());
-            return Request.CreateResponse(HttpStatusCode.OK, entity);
+            try
+            {
+                var response = Mapper.Map<IEnumerable<VehicleMakeViewModel>>(await vmakeService.GetAllAsync());
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Not found.");
+            }
         }
         [Route("Get")]
         [HttpGet]
         public async Task<HttpResponseMessage> GetAsync(Guid id)
         {
-            var entity = Mapper.Map<VehicleMakeViewModel>(await vmakeService.GetAsync(id));
-            return Request.CreateResponse(HttpStatusCode.OK, entity);
+            try
+            {
+                var response = Mapper.Map<VehicleMakeViewModel>(await vmakeService.GetAsync(id));
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Not found.");
+            }
         }
 
 
@@ -41,26 +56,46 @@ namespace Project.MVC_WebAPI.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> AddAsync(VehicleMakeViewModel vmakeView)
         {
-            vmakeView.Id = Guid.NewGuid();
-            var entity = await vmakeService.AddAsync(Mapper.Map<IVehicleMakeDomainModel>(vmakeView));
-            return Request.CreateResponse(HttpStatusCode.OK, entity);
+            try {
+                vmakeView.Id = Guid.NewGuid();
+                var response = await vmakeService.AddAsync(Mapper.Map<IVehicleMakeDomainModel>(vmakeView));
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Can't add vehicle make");
+            }
+            
         }
 
         [Route("Delete")]
         [HttpDelete]
         public async Task<HttpResponseMessage> DeleteAsync(Guid id)
         {
+            try {
+                var response = await vmakeService.DeleteAsync(id);
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Not found.");
+            }
 
-            var entity = await vmakeService.DeleteAsync(id);
-            return Request.CreateResponse(HttpStatusCode.OK, entity);
         }
 
         [Route("Edit")]
         [HttpPut]
         public async Task<HttpResponseMessage> EditAsync(VehicleMakeViewModel vmakeView)
         {
-            var entity = await vmakeService.UpdateAsync(Mapper.Map<IVehicleMakeDomainModel>(vmakeView));
-            return Request.CreateResponse(HttpStatusCode.OK, entity);
+            try {
+                var response = await vmakeService.UpdateAsync(Mapper.Map<IVehicleMakeDomainModel>(vmakeView));
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Wrong input.");
+            }
+
         }
 
     }
